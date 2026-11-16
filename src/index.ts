@@ -1,7 +1,9 @@
 import { parseTargetUrl } from './arguments.js';
 import { ExitCode, REQUEST_COUNT } from './constants.js';
+import { formatRequest, formatSummary } from './format.js';
 import type { RequestResult } from './interfaces.js';
 import { measureRequest } from './measure.js';
+import { calculateStats } from './stats.js';
 import { getErrorMessage } from './utils.js';
 
 const runRequests = async (url: URL): Promise<RequestResult[]> => {
@@ -13,9 +15,7 @@ const runRequests = async (url: URL): Promise<RequestResult[]> => {
     });
 
     results.push(result);
-    console.log(
-      `Request ${index}/${REQUEST_COUNT}: ${result.bytes} bytes in ${Math.round(result.durationMs)} ms`
-    );
+    console.log(formatRequest(index, result));
   }
 
   return results;
@@ -26,7 +26,9 @@ const main = async (): Promise<void> => {
 
   console.log(`Target: ${url.href}`);
 
-  await runRequests(url);
+  const results = await runRequests(url);
+
+  console.log(`\n${formatSummary(calculateStats(results))}`);
 };
 
 main().catch((error: unknown) => {
