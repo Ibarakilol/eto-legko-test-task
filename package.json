@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "tsx src/index.ts",
     "lint": "yarn lint:ts && yarn lint:js",
     "lint:ts": "tsc --noEmit",
     "lint:js": "eslint . --max-warnings 0",
