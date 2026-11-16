@@ -1,0 +1,16 @@
+{
+  "name": "eto-legko-test-task",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "upgrade-dependencies": "yarn upgrade-interactive --latest"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "typescript": "~6.0.3"
+  },
+  "engines": {
+    "node": "^22.12.0 || >=24.0.0"
+  }
+}
