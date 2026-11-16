@@ -6,6 +6,8 @@ import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
+import sortMembers from './eslint/sort-members.js';
+
 export default defineConfig([
   globalIgnores(['dist/**']),
   {
@@ -53,5 +55,13 @@ export default defineConfig([
       'simple-import-sort/exports': 'error',
       'simple-import-sort/imports': 'error',
     },
+  },
+  {
+    files: ['src/**/*.ts'],
+    languageOptions: {
+      parserOptions: { projectService: true, tsconfigRootDir: import.meta.dirname },
+    },
+    plugins: { local: sortMembers },
+    rules: { 'local/sort-members': 'error' },
   },
 ]);
