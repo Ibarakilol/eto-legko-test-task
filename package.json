@@ -5,10 +5,12 @@
   "type": "module",
   "scripts": {
     "lint:ts": "tsc --noEmit",
+    "format": "prettier --write .",
     "upgrade-dependencies": "yarn upgrade-interactive --latest"
   },
   "devDependencies": {
     "@types/node": "^25.9.2",
+    "prettier": "^3.8.3",
     "tsx": "^4.20.0",
     "typescript": "~6.0.3"
   },
