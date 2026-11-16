@@ -1,17 +1,19 @@
 import { parseTargetUrl } from './arguments.js';
-import { ExitCode, REQUEST_COUNT } from './constants.js';
+import { ExitCode } from './constants.js';
+import { measureRequest } from './measure.js';
 import { getErrorMessage } from './utils.js';
 
-const main = (): void => {
+const main = async (): Promise<void> => {
   const url = parseTargetUrl(process.argv.slice(2));
 
   console.log(`Target: ${url.href}`);
-  console.log(`Planned requests: ${REQUEST_COUNT}`);
+
+  const result = await measureRequest(url);
+
+  console.log(result);
 };
 
-try {
-  main();
-} catch (error) {
+main().catch((error: unknown) => {
   console.error(`Error: ${getErrorMessage(error)}`);
   process.exitCode = ExitCode.FAILURE;
-}
+});
